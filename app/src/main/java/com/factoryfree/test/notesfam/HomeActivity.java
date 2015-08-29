@@ -5,23 +5,27 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.ProfilePictureView;
 
 public class HomeActivity extends FragmentActivity {
 
 
+   /* private static final String PENDING_ACTION_BUNDLE_KEY = "com.factoryfree.test.notesfam";*/
     private CallbackManager callbackManager;
-    private ProfileTracker profileTracker;
-
+    private TextView greeting;
+    private ProfilePictureView profilePictureView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,40 +40,32 @@ public class HomeActivity extends FragmentActivity {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                handlePendingAction();
                 updateUI();
             }
 
             @Override
             public void onCancel() {
-                if (pendingAction != PendingAction.NONE) {
-                    showAlert();
-                    pendingAction = PendingAction.NONE;
-                }
+
                 updateUI();
             }
 
             @Override
-            public void onError(FacebookException e) {
-                if (pendingAction != PendingAction.NONE
-                        && exception instanceof FacebookAuthorizationException) {
-                    showAlert();
-                    pendingAction = PendingAction.NONE;
+            public void onError(FacebookException exception) {
+            if( exception instanceof FacebookAuthorizationException){
+                showAlert();
                 }
                 updateUI();
             }
-
             private void showAlert() {
-                new AlertDialog.Builder(HomeActivity.this)
+                new AlertDialog.Builder(
+                        HomeActivity.this)
                         .setTitle(R.string.cancelled)
                         .setMessage(R.string.permission_not_granted)
-                        .setPositiveButton(R.string.ok, null)
                         .show();
             }
         });
 
-
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_home);
 
     }
 
@@ -95,47 +91,14 @@ public class HomeActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Call the 'activateApp' method to log an app event for use in analytics and advertising
-        // reporting.  Do so in the onResume methods of the primary Activities that an app may be
-        // launched into.
-        AppEventsLogger.activateApp(this);
-
-        updateUI();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        // Call the 'deactivateApp' method to log an app event for use in analytics and advertising
-        // reporting.  Do so in the onPause methods of the primary Activities that an app may be
-        // launched into.
-        AppEventsLogger.deactivateApp(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        profileTracker.stopTracking();
-    }
 
     private void updateUI(){
+        Profile profile = Profile.getCurrentProfile();
+        if (profile != null) {
 
+        } else {
+
+        }
         
     }
 
