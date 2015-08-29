@@ -1,4 +1,5 @@
 package com.factoryfree.test.notesfam;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.ProfilePictureView;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends Activity {
 
 
    /* private static final String PENDING_ACTION_BUNDLE_KEY = "com.factoryfree.test.notesfam";*/

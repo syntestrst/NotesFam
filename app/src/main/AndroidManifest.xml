@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.factoryfree.test.notesfam" >
+    <!-- PERSMISSION -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- PERSMISSION -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- SPLASH SCREEN ACTIVITY -->
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/app_name" >
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,16 +24,30 @@
             </intent-filter>
         </activity>
 
-
+        <!--FACEBOOK ACTIVITY WTF-->
         <activity
             android:name="com.facebook.FacebookActivity"
+            android:label="@string/app_name"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+             />
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
         <meta-data android:name="com.facebook.sdk.ApplicationName"
             android:value="@string/facebook_app_name" />
+
+        <!--MAIN ACTIVITY WTF-->
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
 
 
 
