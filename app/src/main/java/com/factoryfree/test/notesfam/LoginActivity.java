@@ -25,11 +25,10 @@ public class LoginActivity extends Activity {
 
 
     private CallbackManager callbackManager;
-    private AccessToken accessToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        accessToken = AccessToken.getCurrentAccessToken();
         //////////////////////////////////////////////
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
