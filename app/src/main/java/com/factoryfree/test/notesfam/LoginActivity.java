@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
@@ -48,12 +48,13 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("onSuccess", "onSuccess");
-
+                updateUI();
             }
 
             @Override
             public void onCancel() {
                 Log.d("onCancel", "onCancel");
+                updateUI();
             }
 
             @Override
@@ -61,6 +62,7 @@ public class LoginActivity extends Activity {
                 if (exception instanceof FacebookAuthorizationException) {
                     showAlert();
                 }
+                updateUI();
             }
 
             private void showAlert() {
@@ -104,12 +106,22 @@ public class LoginActivity extends Activity {
     //////////////////////////////////////////////////
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("onActivityResult","onActivityResult");
+        Log.d("onActivityResult", "onActivityResult");
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
+    }
+    private void updateUI() {
+
+        boolean token = AccessToken.getCurrentAccessToken() != null;
+        Profile profile = Profile.getCurrentProfile();
+
+        if (token && profile != null) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+
+        }
+    }
 }
