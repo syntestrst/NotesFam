@@ -133,7 +133,7 @@ public class LoginActivity extends Activity {
         Profile profile = Profile.getCurrentProfile();
 
         if (token && profile != null) {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
         } else {
