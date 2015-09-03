@@ -2,6 +2,7 @@ package com.factoryfree.test.notesfam;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,10 +23,8 @@ import java.util.Date;
 
 public class HomeActivity extends Activity{
 
-    ////////
-    // onActivityResult call request code
-    ////
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100; // onActivityResult call request code
     public static final int MEDIA_TYPE_IMAGE = 1;
     private Uri fileUri;
 
@@ -46,29 +45,57 @@ public class HomeActivity extends Activity{
             ////////////////////////////////////
             // Compose Intent camera
             ////////////////////////////
+
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            ///////////////////////////////////////
+            //The Android Camera application saves a full-size photo if you give it a file to save into.
+            // You must provide a fully qualified file name where the camera app should save the photo.
+            ///////////////////
             fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+            //////////////////////////////////////
+            // small Bitmap in the extras, under the key "data".
+            // Bundle extras = data.getExtras();
+            // Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // mImageView.setImageBitmap(imageBitmap);
+            // ///////////////
+            /*intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name*/
 
 
             ////////////////////////////////////
-            // Start camera Intent
+            // Start camera Intent (Implicit MediaStore.ACTION_IMAGE_CAPTURE)
             ////////////////////////////
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-
+            if(intent.resolveActivity(getPackageManager()) != null){
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
         }
     };
             ////////////////////////////////////
             // Receive a camera Intent Result
+            // A result code specified by the second activity.
+            // This is either RESULT_OK if the operation was successful
+            // or RESULT_CANCELED if the user backed out or the operation failed for some reason.
+            //
             ////////////////////////////
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            Log.d("cas0", "here");
             if (resultCode == RESULT_OK) {
-                Log.d("cas1", "here");
-                // Image captured and saved to fileUri specified in the Intent
-                Toast.makeText(this, "Image saved to:\n" + data , Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Image saved to:\n" + fileUri, Toast.LENGTH_LONG).show();
+                Log.d("FileUri","result " + fileUri);
+
+                if(fileuri not null){
+                    // Encode crypt and upload at class on parse.com
+                    if(upload call back ok){
+                        // delete on Environment.getExternalStoragePublicDirectory
+                    }
+                    else{
+                        // Error upload on parse.com class
+                    }
+                }
+                else{
+                    // Error fileuri
+                }
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
@@ -88,9 +115,8 @@ public class HomeActivity extends Activity{
     private static File getOutputMediaFile(int type){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
-
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+        // checl later: TODO
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyCameraApp");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
