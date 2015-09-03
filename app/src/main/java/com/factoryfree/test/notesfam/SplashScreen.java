@@ -45,7 +45,7 @@ public class SplashScreen extends Activity {
                     in the background.*/
                     Intent intent = new Intent(SplashScreen.this, HomeActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //test
+                    /*overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //test*/
                     finish();
                 }
             }, SPLASH_TIME_OUT);
@@ -57,7 +57,6 @@ public class SplashScreen extends Activity {
                 public void run() {
                     Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }
             }, SPLASH_TIME_OUT);
