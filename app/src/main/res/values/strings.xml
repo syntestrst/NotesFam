@@ -12,4 +12,7 @@
     <string name="success">Success</string>
     <string name="error">Error</string>
     <string name="facebook_login">Event</string>
+
+    <string name="parse_app_id">Wz2ZU7eF3Fur7hp9SIhigKRwCJDC2cQRo3arGWGP</string>
+    <string name="parse_client_key">oZ89xZZ1cnGik2m47hQHZzh8kCLJkBsE1PnkDEES</string>
 </resources>
