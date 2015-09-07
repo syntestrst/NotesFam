@@ -15,4 +15,9 @@
 
     <string name="parse_app_id">Wz2ZU7eF3Fur7hp9SIhigKRwCJDC2cQRo3arGWGP</string>
     <string name="parse_client_key">oZ89xZZ1cnGik2m47hQHZzh8kCLJkBsE1PnkDEES</string>
+
+    <string name="button_photo">Take Picture</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

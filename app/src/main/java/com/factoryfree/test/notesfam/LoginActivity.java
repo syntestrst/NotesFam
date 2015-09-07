@@ -6,22 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookAuthorizationException;
-import com.facebook.FacebookButtonBase;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 /**
  * Created by test on 29/08/2015.
@@ -32,11 +26,7 @@ public class LoginActivity extends Activity {
 
 
     private CallbackManager callbackManager;
-    private View.OnClickListener mCorkyListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            Log.d("event","eventbutton");
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +78,6 @@ public class LoginActivity extends Activity {
         });
 
         setContentView(R.layout.activity_login);
-       /* LoginButton button = (LoginButton) findViewById(R.id.facebook_login);
-        button.setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
-        button.setOnClickListener(mCorkyListener); test external setOnClickListener on facebook button*/
 
     }
 
