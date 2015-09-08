@@ -1,3 +1,7 @@
+
+<!-- In order to slide our navigation drawer over the ActionBar,
+    we need to use the new Toolbar widget as defined in the AppCompat v21 library.
+    The Toolbar can be embedded into your view hierarchy which makes sure that the drawer slides over the ActionBar.-->
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" >  <!--Apply a theme to  application-->
         <!-- SDK PARSE -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"
@@ -26,8 +26,7 @@
         <!-- SPLASH SCREEN ACTIVITY -->
         <activity
             android:name=".SplashScreen"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <!--The <action> element specifies that this is the "main" entry point to the application-->
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +40,6 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
              />
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
@@ -49,14 +47,11 @@
 
         <!--LOGIN ACTIVITY WTF-->
         <activity
-            android:name=".LoginActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:name=".LoginActivity">
 
         </activity>
         <!--HOME ACTIVITY WTF-->
-        <activity android:name=".HomeActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
-
+        <activity android:name=".HomeActivity">
         </activity>
 
 

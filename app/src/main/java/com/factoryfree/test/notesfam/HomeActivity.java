@@ -1,23 +1,25 @@
 package com.factoryfree.test.notesfam;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -41,6 +43,12 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity{
 
+    /** AppCompatActivity - Adds an application activity class
+     that can be used as a base class for activities that use the Support Library action bar implementation.
+     This library includes support for material design user interface implementations.
+     */
+
+
     private static final String TAG = HomeActivity.class.getSimpleName(); // for TAG Log class
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100; // onActivityResult call request code
     private static final int MEDIA_TYPE_IMAGE = 1;
@@ -48,12 +56,12 @@ public class HomeActivity extends AppCompatActivity{
     private String fileName = null;
     private File mediaFile;
 
-    /*private String[] mPlanetTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;*/
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
+    private NavigationView nvDrawer;
+    private DrawerLayout dlDrawer;
+    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +78,24 @@ public class HomeActivity extends AppCompatActivity{
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        // Find our drawer view
+        dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         // Tie DrawerLayout events to the ActionBarToggle
         dlDrawer.setDrawerListener(drawerToggle);
 
+        // Set the menu icon instead of the launcher icon.
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-
+        
 
     }
 
@@ -102,8 +116,7 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the planet to show based on
-        // position
+
         Fragment fragment = null;
 
         Class fragmentClass;
@@ -128,8 +141,10 @@ public class HomeActivity extends AppCompatActivity{
         }
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.flContent, fragment)
+                .commit();
 
         // Highlight the selected item, update the title, and close the drawer
         menuItem.setChecked(true);
@@ -146,7 +161,9 @@ public class HomeActivity extends AppCompatActivity{
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
         }
-
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -164,13 +181,6 @@ public class HomeActivity extends AppCompatActivity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private View.OnClickListener mListenner = new View.OnClickListener() {
         @Override
@@ -333,45 +343,6 @@ public class HomeActivity extends AppCompatActivity{
         }
 
     }
-
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-    /** Swaps fragments in the main content view */
-    private void selectItem(int position) {
-        ///////////////////////////////
-        // Create a new fragment
-        /////////////
-        Fragment fragment = new PlanetFragment();
-        Bundle args = new Bundle();
-        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-        fragment.setArguments(args);
-
-        ////////////////////////////////
-        // Insert the fragment by replacing any existing fragment
-        /////////////////////
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-               /* .addToBackStack(null) // test */
-                .replace(R.id.content_frame, fragment)
-                .commit();
-
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        /*setTitle(mPlanetTitles[position]);*/
-        mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-   /* @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        getActionBar().setTitle(mTitle);
-    }*/
 
     /** Checks if external storage is available for read and write */
     private boolean isExternalStorageMounted(){
