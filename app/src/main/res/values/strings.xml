@@ -20,4 +20,10 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <!--  MENU SLIDE DRAWER-->
+    <string name="home">home</string>
+    <string name="gallery">gallery</string>
+    <string name="param">param</string>
+    <string name="about">about</string>
 </resources>

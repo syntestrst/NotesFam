@@ -18,20 +18,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- The main content view -->
+        <!-- The main content view
+         In order to replace one fragment with another,
+         the activity's layout includes an empty FrameLayout
+         that acts as the fragment container-->
         <FrameLayout
             android:id="@+id/flContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#ffff">
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- The navigation drawer -->
+    <!-- The navigation drawer" -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nvView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
+        android:background="@android:color/black"
+
+
         app:menu="@menu/drawer_view"
         app:headerLayout="@layout/nav_header"/>
 

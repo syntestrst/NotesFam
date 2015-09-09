@@ -6,25 +6,28 @@
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_one"
-            android:title="First" />
+            android:title="@string/home" />
+
         <item
             android:id="@+id/nav_second_fragment"
             android:icon="@drawable/ic_two"
-            android:title="Second" />
+            android:title="@string/gallery" />
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@drawable/ic_three"
-            android:title="Third" />
+            android:title="@string/param" />
+        <!--<item
+            android:id="@+id/nav_third_fragment"
+            android:icon="@drawable/ic_three"
+            android:title="@string/about" />-->
     </group>
 
     <item android:title="Sub items">
-       <!-- <menu>
+        <menu>
             <item
-               &lt;!&ndash; android:icon="@drawable/ic_dashboard"&ndash;&gt;
                 android:title="Sub item 1" />
             <item
-                &lt;!&ndash;android:icon="@drawable/ic_forum"&ndash;&gt;
                 android:title="Sub item 2" />
-        </menu>-->
+        </menu>
     </item>
 </menu>
