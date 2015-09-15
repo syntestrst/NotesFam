@@ -1,4 +1,4 @@
-package com.factoryfree.test.notesfam;
+package com.factoryfree.test.notesfam.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.factoryfree.test.notesfam.HomeActivity;
+import com.factoryfree.test.notesfam.R;
 import com.parse.Parse;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -185,6 +187,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     ///////////////////////////////////////
                     // image to byteArray
                     // First, you'll need to have the data in byte[] form and then create a ParseFile with it.
+                    // In many cases when the "context is required", "getContentResolver":
+                    // we simply need to pass in the instance of the current activity :=)
                     ////////////////
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), fileUri);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream(); //Creates a new byte array output stream. The buffer capacity is initially 32 bytes, though its size increases if necessary.

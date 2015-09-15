@@ -1,4 +1,4 @@
-package com.factoryfree.test.notesfam;
+package com.factoryfree.test.notesfam.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.factoryfree.test.notesfam.R;
+import com.factoryfree.test.notesfam.fragments.FirstFragment;
+import com.factoryfree.test.notesfam.fragments.SecondFragment;
+import com.factoryfree.test.notesfam.fragments.ThirdFragment;
 
 /**
  * Created by test on 30/08/2015.

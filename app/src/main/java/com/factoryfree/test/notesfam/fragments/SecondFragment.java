@@ -1,4 +1,4 @@
-package com.factoryfree.test.notesfam;
+package com.factoryfree.test.notesfam.fragments;
 
 import android.support.v4.app.FragmentActivity;
 

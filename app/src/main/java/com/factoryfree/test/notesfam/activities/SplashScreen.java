@@ -1,4 +1,4 @@
-package com.factoryfree.test.notesfam;
+package com.factoryfree.test.notesfam.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.os.Handler;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.FacebookSdk;
+import com.factoryfree.test.notesfam.R;
 
 /**
  * Created by test on 29/08/2015.

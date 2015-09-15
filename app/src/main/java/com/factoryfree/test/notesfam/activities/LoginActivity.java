@@ -1,4 +1,4 @@
-package com.factoryfree.test.notesfam;
+package com.factoryfree.test.notesfam.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.factoryfree.test.notesfam.R;
 
 /**
  * Created by test on 29/08/2015.
