@@ -2,8 +2,7 @@
 <resources>
     <!-- inherit from the material theme -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Main theme colors http://developer.android.com/training/material/theme.html
-        -->
+
         <!--   your app branding color for the app bar -->
         <item name="colorPrimary">@color/primary</item>
 

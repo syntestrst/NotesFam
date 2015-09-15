@@ -23,8 +23,10 @@ import com.factoryfree.test.notesfam.fragments.ThirdFragment;
 public class HomeActivity extends AppCompatActivity{
 
     /** AppCompatActivity - Adds an application activity class
-     that can be used as a base class for activities that use the Support Library action bar implementation.
-     This library includes support for material design user interface implementations.
+     *  that can be used as a base class for activities that use the Support Library action bar implementation.
+     *  This library includes support for material design user interface implementations.
+     *  "ActionBarActivity ==> This class is deprecated.
+     *  Use AppCompatActivity instead"
      */
 
 
@@ -54,6 +56,7 @@ public class HomeActivity extends AppCompatActivity{
 
         // Set the menu icon instead of the launcher icon.
         final ActionBar ab = getSupportActionBar();
+        // To enable the app icon as an Up button, call setDisplayHomeAsUpEnabled()
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
         ab.setDisplayHomeAsUpEnabled(true);
 

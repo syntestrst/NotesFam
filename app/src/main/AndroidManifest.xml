@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
    <!-- <uses-permission android:name="android.permission.CAMERA"
-   If you are using the camera via an intent, your application does not need to request this permissi/>-->
+   If you are using the camera via an intent, your application does not need to request this permission/>-->
 
     <!-- FEATURES FOR BLOCK INSTALL PLAY STORE-->
     <!--<uses-feature android:name="android.hardware.camera" />-->
@@ -25,7 +25,7 @@
             android:value="@string/parse_client_key" />
         <!-- SPLASH SCREEN ACTIVITY -->
         <activity
-            android:name=".SplashScreen"
+            android:name=".activities.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <!--The <action> element specifies that this is the "main" entry point to the application-->
@@ -47,11 +47,11 @@
 
         <!--LOGIN ACTIVITY WTF-->
         <activity
-            android:name=".LoginActivity">
+            android:name=".activities.LoginActivity">
 
         </activity>
         <!--HOME ACTIVITY WTF-->
-        <activity android:name=".HomeActivity">
+        <activity android:name=".activities.HomeActivity">
         </activity>
 
 

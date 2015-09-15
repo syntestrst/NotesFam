@@ -32,20 +32,20 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //////////////////////////////////////////////
-        // Initialize the SDK before executing any other operations,
-        // especially, if you're using Facebook UI elements.
-        /////////////////////////////////////
+
+         /** Initialize the SDK before executing any other operations,
+         especially, if you're using Facebook UI elements.*/
+
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Creates an instance of CallbackManager
         callbackManager = CallbackManager.Factory.create();
-        /////////////////////////////////////////////////
-        // This class manages login and permissions for Facebook.
-        // Getter for the login manager getInstance.
-        // Registers a login callback to the given callback manager with registerCallback
-        // callbackManager	The callback manager that will encapsulate the callback.
-        // callback	The login callback that will be called on login completion.
-        ////////////////////////////////////////
+
+        /**  This class manages login and permissions for Facebook.
+        Getter for the login manager getInstance.
+        Registers a login callback to the given callback manager with registerCallback
+        callbackManager	The callback manager that will encapsulate the callback.
+        callback	The login callback that will be called on login completion.*/
+
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -91,9 +91,9 @@ public class LoginActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        /** Handle action bar item clicks here. The action bar will
+        automatically handle clicks on the Home/Up button, so long
+        as you specify a parent activity in AndroidManifest.xml.*/
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -104,10 +104,10 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    ////////////////////////////////////////////////////////
-    // The CallbackManager manages the callbacks into the FacebookSdk
-    // from an Activity's or Fragment's onActivityResult() method.
-    //////////////////////////////////////////////////
+
+     /** The CallbackManager manages the callbacks into the FacebookSdk
+     from an Activity's or Fragment's onActivityResult() method.*/
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("onActivityResult", "onActivityResult");

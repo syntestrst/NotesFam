@@ -39,11 +39,6 @@ public class SplashScreen extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    /* Explicit intents specify the component to start by name (the fully-qualified class name).
-                    You'll typically use an explicit intent to start a component in your own app,
-                    because you know the class name of the activity or service you want to start.
-                    For example, start a new activity in response to a user action or start a service to download a file
-                    in the background.*/
                     Intent intent = new Intent(SplashScreen.this, HomeActivity.class);
                     startActivity(intent);
                     /*overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //test*/

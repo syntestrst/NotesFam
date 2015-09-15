@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.factoryfree.test.notesfam.HomeActivity;
+import com.factoryfree.test.notesfam.activities.HomeActivity;
 import com.factoryfree.test.notesfam.R;
 import com.parse.Parse;
 import com.parse.ParseFile;
@@ -60,15 +60,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private View.OnClickListener mListenner = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ////////////////////////////////////
-            // Compose Intent camera
-            ////////////////////////////
+
+             /** Compose Intent camera*/
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            ///////////////////////////////////////
-            //The Android Camera application saves a full-size photo if you give it a file to save into.
-            // You must provide a fully qualified file name where the camera app should save the photo.
-            ///////////////////
+
+           /** The Android Camera application saves a full-size photo if you give it a file to save into.
+             You must provide a fully qualified file name where the camera app should save the photo.*/
+
             fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
@@ -79,9 +78,15 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             // mImageView.setImageBitmap(imageBitmap);
             // ///////////////
 
-            ////////////////////////////////////
-            // Start camera Intent (Implicit MediaStore.ACTION_IMAGE_CAPTURE)
-            ////////////////////////////
+            /**Once Activity was navigated back,
+             * case 1 ==== the result will be sent to Activity's onActivityResult with the modified requestCode
+             * which will be decoded to original requestCode + Fragment's identity. After that,
+             * Activity will send the Activity Result to that Fragment through onActivityResult.
+             * And it's all done.
+             * case 2 ==== The problem is:
+             * Activity could send the result to only the Fragment that has been attached directly
+             * to Activity but not the nested one. That's the reason why onActivityResult
+             * of nested fragment would never been called no matter what.*/
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     };
@@ -118,6 +123,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 }
             }
             // Create a media file name
+            // import java.time.Instant;
+            // Instant timestamp = Instant.now(); FUCK J8 no work on android
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             if (type == MEDIA_TYPE_IMAGE){
@@ -128,11 +135,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             return mediaFile;
         }
         else if(isExternalStorageMountedOncomputer()){
-            ////////////////////////////////////
-            // Error with Environment.getExternalStorageState()
-            // media is connected to computer.
-            // i want block.
-            //////////////////////////
+
+            /** Error with Environment.getExternalStorageState()
+                media is connected to computer.
+                 i want block */
             Log.e("MountedAtcomputer", "external storage is connected at computer");
             return null;
         }
@@ -170,12 +176,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    ////////////////////////////////////
-    // Receive a camera Intent Result
-    // A result code specified by the second activity.
-    // This is either RESULT_OK if the operation was successful
-    // or RESULT_CANCELED if the user backed out or the operation failed for some reason.
-    ////////////////////////////
+
+    /** Receive a camera Intent Result
+    A result code specified by the second activity.
+    This is either RESULT_OK if the operation was successful
+    or RESULT_CANCELED if the user backed out or the operation failed for some reason.*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
@@ -184,12 +189,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Log.d("onActivityResult", "result " + fileUri);
                 try{
 
-                    ///////////////////////////////////////
-                    // image to byteArray
-                    // First, you'll need to have the data in byte[] form and then create a ParseFile with it.
-                    // In many cases when the "context is required", "getContentResolver":
-                    // we simply need to pass in the instance of the current activity :=)
-                    ////////////////
+
+                     /** image to byteArray
+                     First, you'll need to have the data in byte[] form and then create a ParseFile with it.
+                     In many cases when the "context is required", "getContentResolver":
+                     we simply need to pass in the instance of the current activity :=)*/
+
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), fileUri);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream(); //Creates a new byte array output stream. The buffer capacity is initially 32 bytes, though its size increases if necessary.
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -203,10 +208,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     }
                     ParseFile file = new ParseFile(fileName, byteArray);
 
-                    // ///////////////////////////////////////
-                    // As with ParseObject, there are many variants of the save method you can use depending
-                    // on what sort of callback and error handling suits you.
-                    ///////////////
+
+                    /** As with ParseObject, there are many variants of the save method you can use depending
+                    on what sort of callback and error handling suits you.*/
+
                     file.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(com.parse.ParseException e) {
@@ -220,13 +225,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         }
                     });
 
-                    ///////////////////////////////////////
-                    // Finally, after the save completes, you can associate a
-                    // ParseFile onto a ParseObject just like any other piece of data
-                    ///////////////
+
+                    /** Finally, after the save completes, you can associate a
+                    ParseFile onto a ParseObject just like any other piece of data*/
+
                     ParseObject Parseobject = new ParseObject("LivePic");
                     Parseobject.put("livepic", file);
-                    /*Parseobject.pin("updateAt", new Date());*/
+                    Parseobject.put("blockedAt", new Date());
                     Parseobject.saveInBackground();
                 }
                 catch(FileNotFoundException e){
