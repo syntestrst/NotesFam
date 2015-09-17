@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity{
         // Set the menu icon instead of the launcher icon.
         final ActionBar ab = getSupportActionBar();
         // To enable the app icon as an Up button, call setDisplayHomeAsUpEnabled()
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white);
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Setup drawer view

@@ -18,13 +18,13 @@
 
     </android.support.v7.widget.Toolbar>
 
-        <LinearLayout
-            android:orientation="vertical"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="wrap_content"
             android:background="@color/toolbar_login"
-            android:layout_marginTop="12dp"
-            android:elevation="4dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:elevation="0dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,11 +32,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/email"
                 android:id="@+id/textView"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp" />
 
             <EditText
-                android:layout_width="280dp"
+                android:layout_width="185dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
@@ -49,43 +49,53 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/password"
                 android:id="@+id/textView2"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp" />
 
             <EditText
-                android:layout_width="280dp"
+                android:layout_width="185dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText2"
-                android:layout_gravity="center" />
+                android:id="@+id/editText2" />
 
-            <Button
-                android:layout_width="280dp"
-                android:layout_height="38dp"
-                android:text="@string/login_button"
-                android:id="@+id/button2"
-                android:background="#00bbd3"
-                android:layout_marginTop="25dp"
-                android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/forgot_password"
-                android:id="@+id/textView3"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0"
-                android:layout_marginTop="25dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_login"
+        android:elevation="0dp">
 
-        </LinearLayout>
+        <Button
+            android:layout_width="280dp"
+            android:layout_height="38dp"
+            android:text="@string/login_button"
+            android:id="@+id/button2"
+            android:background="#00bbd3"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="65dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/forgot_password"
+            android:id="@+id/textView3"
+            android:layout_weight="0"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="35dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp">
+        android:layout_height="156dp"
+        android:layout_marginTop="10dp"
+        android:elevation="16dp"
+        android:background="@color/toolbar_login">
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,11 +111,11 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
             android:paddingTop="9.5dp"
             android:paddingBottom="9.5dp"
-            android:elevation="12dp"/>
+            android:elevation="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="17dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,10 +123,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/create_account"
             android:id="@+id/textView5"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp" />
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
-
 
 
 </LinearLayout>

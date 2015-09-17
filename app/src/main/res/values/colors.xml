@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Color Material design-->
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="accent">#FF4081</color>
+
+    <!-- Color login screen-->
+    <color name="toolbar_login">#384248</color>
+    <color name="background_login">#263238</color>
+
+    <!-- Color home screen-->
+    <color name="frame_layout_content">#FFFF</color>
+
+    <!-- Color menu drawer-->
+    <color name="background_drawer">#040404</color>
+
+    <!-- Color background splash_screen-->
+    <color name="background_splash_screen">#00bcd4</color>
+</resources>

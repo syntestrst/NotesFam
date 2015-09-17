@@ -2,28 +2,37 @@
     <string name="app_name">NotesFam</string>
     <string name="action_settings">Settings</string>
 
+    <!--  FACEBOOK METADATA-->
     <string name="app_id">1379299842395038</string>
     <string name="facebook_app_name">TimeFeel</string>
-
     <string name="cancelled">Cancelled</string>
     <string name="exception">Exception: %1$s</string>
     <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
-
     <string name="success">Success</string>
     <string name="error">Error</string>
     <string name="facebook_login">Event</string>
 
+    <!--  PARSE SDK METADATA-->
     <string name="parse_app_id">Wz2ZU7eF3Fur7hp9SIhigKRwCJDC2cQRo3arGWGP</string>
     <string name="parse_client_key">oZ89xZZ1cnGik2m47hQHZzh8kCLJkBsE1PnkDEES</string>
 
+    <!-- HOME FRAGMENT-->
     <string name="button_photo">Take Picture</string>
 
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
 
     <!--  MENU SLIDE DRAWER-->
     <string name="home">home</string>
     <string name="gallery">gallery</string>
     <string name="param">param</string>
     <string name="about">about</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!--  LOGIN PAGE-->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login_using">Log in Using</string>
+    <string name="create_account">Create an Account</string>
 </resources>
