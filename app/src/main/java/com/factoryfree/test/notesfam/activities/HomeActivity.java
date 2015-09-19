@@ -15,6 +15,7 @@ import com.factoryfree.test.notesfam.R;
 import com.factoryfree.test.notesfam.fragments.FirstFragment;
 import com.factoryfree.test.notesfam.fragments.SecondFragment;
 import com.factoryfree.test.notesfam.fragments.ThirdFragment;
+import com.parse.ParseAnalytics;
 
 /**
  * Created by test on 30/08/2015.
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         setContentView(R.layout.activity_home);
 

@@ -47,7 +47,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Parse.initialize(this.getActivity()); // init SDK Parse*/
+        /*Parse.initialize(this.getActivity()); */// init SDK Parse at starteraplication test*/
 
 
         LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.first_fragment,
