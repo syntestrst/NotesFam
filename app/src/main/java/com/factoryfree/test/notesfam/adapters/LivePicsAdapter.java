@@ -2,14 +2,14 @@ package com.factoryfree.test.notesfam.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.factoryfree.test.notesfam.R;
-import com.factoryfree.test.notesfam.models.Contact;
+import com.factoryfree.test.notesfam.models.LivePic;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
      called RecyclerView.Adapter passing our class,
      that implements the ViewHolder pattern*/
 
-public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class LivePicsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
      /**
       We now have to override two methods so that we can implement our logic:
@@ -30,11 +30,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
       class is created, and onBindViewHolder is called when the SO binds the
       view with the data -- or, in other words, the data is shown in the UI.*/
 
-     // Store a member variable for the contacts
-     private List<Contact> mContacts;
-     // Pass in the contact array into the constructor
-     public ContactsAdapter(List<Contact> contacts) {
-         mContacts = contacts;
+     // Store a member variable
+     private List<LivePic> mLivePics;
+     // Pass  array into the constructor
+     public LivePicsAdapter(List<LivePic> livepics) {
+         mLivePics = livepics;
      }
 
      // Usually involves inflating a layout from XML and returning the holder
@@ -44,10 +44,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_contact, viewGroup , false);
+        View livepicView = inflater.inflate(R.layout.item_livepic, viewGroup, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(livepicView);
         return viewHolder;
     }
 
@@ -55,30 +55,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Contact contact = mContacts.get(position);
+        LivePic livepic = mLivePics.get(position);
 
         // Set item views based on the data model
         TextView textView = viewHolder.nameTextView;
-        textView.setText(contact.getName());
+        textView.setText(livepic.content);
+        Log.d("onBind", "test" + livepic.content);
 
-        Button button = viewHolder.messageButton;
-
-        if (contact.isOnline()) {
-            button.setText("Message");
-            button.setEnabled(true);
-        }
-        else {
-            button.setText("Offline");
-            button.setEnabled(false);
-        }
     }
+     @Override
+     public int getItemCount() {
+         return mLivePics.size();
+     }
 
-    @Override
-    public int getItemCount() {
-        return mContacts.size();
-    }
 
-    // Provide a direct reference to each of the views within a data item
+     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
 
 }

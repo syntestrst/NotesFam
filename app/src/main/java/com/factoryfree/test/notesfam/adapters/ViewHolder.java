@@ -15,7 +15,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     // Your holder should contain a member variable
     // for any view that will be set as you render a row
     public TextView nameTextView;
-    public Button messageButton;
 
     // We also create a constructor that accepts the entire item row
     // and does the view lookups to find each subview
@@ -23,9 +22,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         // Stores the itemView in a public final member variable that can be used
         // to access the context from any ViewHolder instance.
         super(itemView);
-
         nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-        messageButton = (Button) itemView.findViewById(R.id.message_button);
     }
 }
 
