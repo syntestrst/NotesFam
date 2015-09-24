@@ -10,7 +10,7 @@ import com.factoryfree.test.notesfam.R;
 /**
  * Created by test on 19/09/2015.
  */
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     // Your holder should contain a member variable
     // for any view that will be set as you render a row
@@ -23,6 +23,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         // to access the context from any ViewHolder instance.
         super(itemView);
         nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int position = getLayoutPosition(); // get item position
+
+
     }
 }
 

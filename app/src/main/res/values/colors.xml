@@ -10,11 +10,15 @@
     <color name="toolbar_login">#384248</color>
     <color name="background_login">#263238</color>
 
-    <!-- Color home screen-->
-    <color name="frame_layout_content">#FFFF</color>
+    <!-- Color background screen-->
+    <color name="frame_layout_background">#FFFF</color>
+
+    <!-- Color for text -->
+    <color name="text_color">#040404</color>
 
     <!-- Color menu drawer-->
     <color name="background_drawer">#040404</color>
+    <color name="textcolor_drawer">#ffffff</color>
 
     <!-- Color background splash_screen-->
     <color name="background_splash_screen">#00bcd4</color>

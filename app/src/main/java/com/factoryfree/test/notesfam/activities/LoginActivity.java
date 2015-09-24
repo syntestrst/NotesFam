@@ -35,8 +35,8 @@ public class LoginActivity extends Activity {
 
          /** Initialize the SDK before executing any other operations,
          especially, if you're using Facebook UI elements.*/
-
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         // Creates an instance of CallbackManager
         callbackManager = CallbackManager.Factory.create();
 
@@ -45,7 +45,6 @@ public class LoginActivity extends Activity {
         Registers a login callback to the given callback manager with registerCallback
         callbackManager	The callback manager that will encapsulate the callback.
         callback	The login callback that will be called on login completion.*/
-
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -82,39 +81,6 @@ public class LoginActivity extends Activity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /** Handle action bar item clicks here. The action bar will
-        automatically handle clicks on the Home/Up button, so long
-        as you specify a parent activity in AndroidManifest.xml.*/
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-     /** The CallbackManager manages the callbacks into the FacebookSdk
-     from an Activity's or Fragment's onActivityResult() method.*/
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("onActivityResult", "onActivityResult");
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-
-    }
     private void updateUI() {
 
         Boolean token = AccessToken.getCurrentAccessToken() != null;
@@ -128,7 +94,15 @@ public class LoginActivity extends Activity {
 
         }
     }
+    /** The CallbackManager manages the callbacks into the FacebookSdk
+     from an Activity's or Fragment's onActivityResult() method.*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("onActivityResult", "onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
+    }
 
 }
 

@@ -1,6 +1,7 @@
 package com.factoryfree.test.notesfam.fragments;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,7 +18,6 @@ import android.widget.LinearLayout;
 
 import com.factoryfree.test.notesfam.activities.HomeActivity;
 import com.factoryfree.test.notesfam.R;
-import com.parse.Parse;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ProgressCallback;
@@ -46,18 +46,36 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ///////////////////////////////////////
         // Inflate the layout for this fragment
-        /*Parse.initialize(this.getActivity()); */// init SDK Parse at starteraplication test*/
+        LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.first_fragment, container, false);
 
+        ////////////////////
+        // button take picture
+        Button button_picture = (Button) mLinearLayout.findViewById(R.id.take_picture_button);
+        button_picture.setOnClickListener(mButtonPicListener);
 
-        LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.first_fragment,
-                container, false);
-        Button button = (Button) mLinearLayout.findViewById(R.id.button);
-        button.setOnClickListener(mListenner);
-        /*return inflater.inflate(R.layout.first_fragment, container, false);*/
+        ///////////////////
+        // event Datepicker
+        Button button_date = (Button) mLinearLayout.findViewById(R.id.date_picker_button);
+        button_date.setOnClickListener(mButtonDateListener);
+
         return mLinearLayout;
     }
-    private View.OnClickListener mListenner = new View.OnClickListener() {
+
+    private View.OnClickListener mButtonDateListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+        DialogFragment newFragment = new DatePickerFragment();
+            newFragment.show(getActivity().getFragmentManager(), "DatePicker");
+
+
+
+        }
+    };
+
+
+    private View.OnClickListener mButtonPicListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
@@ -110,7 +128,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
             // getFilesDir() Returns a File representing an internal directory for your app.
             // To create a new file in one of these directories, you can use the File() constructor.
-            // internal IS ============== PRIVATE FOR OTHER APP ==================
+            // internal IS ============== PRIVATE FOR OTHER APP (INTENT) ==================
             /*Context context = this;
             File mediaStorageDir = new File(context.getFilesDir(), "LivePic");
             Log.d(TAG, "result_fileuri=" + fileUri);*/
@@ -229,8 +247,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     /** Finally, after the save completes, you can associate a
                     ParseFile onto a ParseObject just like any other piece of data*/
 
-                    ParseObject Parseobject = new ParseObject("LivePic");
-                    Parseobject.put("livepic", file);
+                    ParseObject Parseobject = new ParseObject("LifePic");
+                    Parseobject.put("LifePicture", file);
                     Parseobject.put("blockedAt", new Date());
                     Parseobject.saveInBackground();
                 }

@@ -2,12 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--Note that you can set one of these elements to be default selected by using android:checked="true".-->
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_one"
-            android:title="@string/home" />
-
+            android:title="@string/home"
+            />
         <item
             android:id="@+id/nav_second_fragment"
             android:icon="@drawable/ic_two"
@@ -15,19 +16,17 @@
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@drawable/ic_three"
-            android:title="@string/param" />
-        <!--<item
-            android:id="@+id/nav_third_fragment"
-            android:icon="@drawable/ic_three"
-            android:title="@string/about" />-->
+            android:title="@string/gift" />
     </group>
 
-   <!-- <item android:title="Sub items">
+   <item android:title="Settings">
         <menu>
             <item
-                android:title="Sub item 1" />
+                android:title="Settings"
+                android:icon="@drawable/ic_settings_white"/>
             <item
-                android:title="Sub item 2" />
+                android:title="Notifications"
+                android:icon="@drawable/ic_announcement_white"/>
         </menu>
-    </item>-->
+    </item>
 </menu>

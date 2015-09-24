@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- inherit from the material theme -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!--   your app branding color for the app bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -11,6 +11,11 @@
 
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/accent</item>
+
+        <!-- NODARK NOLIGHT FOR TEST WITH Theme.AppCompat.NOACTIONBAR-->
+        <!--<item name="android:windowBackground">@color/frame_layout_background</item>
+        <item name="android:textColor">@color/text_color</item>-->
+
     </style>
 
 

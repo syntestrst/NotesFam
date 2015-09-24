@@ -8,25 +8,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_photo"
-        android:id="@+id/button"
+        android:id="@+id/take_picture_button"
         android:layout_gravity="center"
-        android:layout_weight="0" />
+        android:layout_marginTop="130dp" />
 
-    <CheckBox
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:id="@+id/checkBox"
-        android:checked="false"
-        android:layout_weight="0" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:id="@+id/checkBox2"
-        android:checked="false"
-        android:layout_weight="0" />
-
+        android:text="Datepicker"
+        android:id="@+id/date_picker_button"
+        android:layout_gravity="left"/>
 
 </LinearLayout>

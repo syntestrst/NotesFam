@@ -18,9 +18,9 @@ public class SplashScreen extends Activity {
     private static int SPLASH_TIME_OUT = 1000;
     private AccessTokenTracker accessTokenTracker;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // The activity is being created.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
@@ -33,6 +33,50 @@ public class SplashScreen extends Activity {
         updateWithToken(AccessToken.getCurrentAccessToken());
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+    }
+    ///////////////////////////////////////////////////
+    // Activity RUNNING
+    //////////////////////////////////////////////////
+    @Override
+    protected void onPause() {
+        super.onPause();
+            // Another activity is taking focus (this activity is about to be "paused").
+        /**
+         * Activity Paused is completely ALIVE
+         * he Activity object is retained in memory, it maintains all state
+         * and member information, and remains attached to the window manager),
+         * but can be killed by the system in extremely low memory situations.
+         * "is called when the device goes to sleep or when a dialog appears"
+         * */
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // The activity is no longer visible (it is now "stopped")
+        /** The activity is completely obscured by another activity (the activity is now in the "background").
+            A stopped activity is also still alive (the Activity object is retained in memory,
+            it maintains all state and member information, but is not attached to the window manager)*/
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // The activity is about to be destroyed.
+    }
+
+
     private void updateWithToken(AccessToken currentAccessToken) {
         if (currentAccessToken != null) {
 

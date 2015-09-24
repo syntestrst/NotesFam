@@ -1,5 +1,7 @@
 package com.factoryfree.test.notesfam.models;
 
+import com.parse.ParseObject;
+
 import java.util.ArrayList;
 import java.util.List;
 

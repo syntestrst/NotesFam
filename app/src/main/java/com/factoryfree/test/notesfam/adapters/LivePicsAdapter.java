@@ -32,6 +32,7 @@ public class LivePicsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
      // Store a member variable
      private List<LivePic> mLivePics;
+
      // Pass  array into the constructor
      public LivePicsAdapter(List<LivePic> livepics) {
          mLivePics = livepics;

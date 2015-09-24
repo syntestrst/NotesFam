@@ -1,7 +1,21 @@
 
-<!-- In order to slide our navigation drawer over the ActionBar,
+
+
+
+<!--
+    In order to slide our navigation drawer over the ActionBar,
     we need to use the new Toolbar widget as defined in the AppCompat v21 library.
-    The Toolbar can be embedded into your view hierarchy which makes sure that the drawer slides over the ActionBar.-->
+    The Toolbar can be embedded into your view hierarchy which makes sure that the,
+    drawer slides over the ActionBar.-->
+
+<!--Since the Toolbar is independent, it can also be themed independently as well.
+    The android:theme is the main theme of the bar, and android:popupTheme is the theme to apply to menu item pop ups.
+    If you are using a light theme, or want the look of a dark Action Bar,
+    you can apply two themes directly on the Toolbar, which would look like this:
+    android:popupTheme="@android:style/ThemeOverlay.Material.Light" for menu popup-->
+
+
+
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
