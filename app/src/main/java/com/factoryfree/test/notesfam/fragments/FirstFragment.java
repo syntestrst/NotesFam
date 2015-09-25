@@ -1,6 +1,7 @@
 package com.factoryfree.test.notesfam.fragments;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,13 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.factoryfree.test.notesfam.activities.HomeActivity;
 import com.factoryfree.test.notesfam.R;
@@ -33,7 +35,7 @@ import java.util.Date;
 /**
  * Created by test on 07/09/2015.
  */
-public class FirstFragment extends Fragment implements View.OnClickListener {
+public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSetListener  {
 
     private static final String TAG = HomeActivity.class.getSimpleName(); // for TAG Log class
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100; // onActivityResult call request code
@@ -42,39 +44,58 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public Uri fileUri;
     public File mediaFile;
     private String fileName = null;
+    TextView textview;
 
-
+    public FirstFragment() {
+        // Required empty public constructor
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ///////////////////////////////////////
         // Inflate the layout for this fragment
-        LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.first_fragment, container, false);
+        View RootView = inflater.inflate(R.layout.first_fragment, container, false);
+
+        ////////////////////
+        // texview
+        TextView textview = (TextView)RootView.findViewById(R.id.date_textview);
 
         ////////////////////
         // button take picture
-        Button button_picture = (Button) mLinearLayout.findViewById(R.id.take_picture_button);
+        Button button_picture = (Button) RootView.findViewById(R.id.take_picture_button);
         button_picture.setOnClickListener(mButtonPicListener);
 
         ///////////////////
         // event Datepicker
-        Button button_date = (Button) mLinearLayout.findViewById(R.id.date_picker_button);
+        Button button_date = (Button) RootView.findViewById(R.id.date_picker_button);
         button_date.setOnClickListener(mButtonDateListener);
 
-        return mLinearLayout;
+        return RootView;
     }
 
-    private View.OnClickListener mButtonDateListener = new View.OnClickListener() {
+
+    /////////////////////////////////////////////////////////
+    // DATEPICKER
+    /////////////////////////////
+    private View.OnClickListener mButtonDateListener = new View.OnClickListener() {  // setting listener for user click event
         @Override
-        public void onClick(View view) {
-        DialogFragment newFragment = new DatePickerFragment();
-            newFragment.show(getActivity().getFragmentManager(), "DatePicker");
-
-
-
+        public void onClick(View v) {
+            DialogFragment newFragment = new DatePickerFragment(); // creating DialogFragment which creates DatePickerDialog
+            newFragment.setTargetFragment(FirstFragment.this, 0);  // Passing this fragment DatePickerFragment.
+            newFragment.show(getActivity().getFragmentManager(), "datePicker"); // ededed in Homeactivity
+            /* Log.d("getActivity", "= " + getActivity());*/
+            /*Log.d("getActivityfragsupp", "= " + getActivity().getSupportFragmentManager());*/ // with import android.support.v4.app.Fragment;
+           /* Log.d("getActivityfragman", "= " + getActivity().getFragmentManager());*/
         }
     };
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Log.d("onDateSetfragment","= " + year + month + day);
+        textview.setText(year);
+    }
 
-
+    ////////////////////////////////////////////////////////
+    // TAKE PICTURE
+    ///////////////////////////
     private View.OnClickListener mButtonPicListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -189,11 +210,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         return false;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
 
     /** Receive a camera Intent Result
     A result code specified by the second activity.
@@ -267,4 +283,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
-}
+
+
+
+};

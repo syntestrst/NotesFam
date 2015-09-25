@@ -73,7 +73,9 @@ public class HomeActivity extends AppCompatActivity{
         runfragment.setArguments(getIntent().getExtras());*/
 
         // Add the fragment to the 'fragment_container' FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.flContent, runfragment)
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.flContent, runfragment)
                 .commit();
     }
 
