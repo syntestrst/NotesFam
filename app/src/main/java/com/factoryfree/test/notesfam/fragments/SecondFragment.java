@@ -3,7 +3,7 @@ package com.factoryfree.test.notesfam.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -104,13 +104,13 @@ public class SecondFragment extends Fragment {
             //////////////////////////////////////////////////////////////////
             // TODO: implements logic with date when everything work (need design checkbox or select date in UI)
             /////////////////////////////////////////
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("comment");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("LifePic");
             try{
                 List<ParseObject> queryResult = query.find();
 
                 for(ParseObject po: queryResult){
                     LivePic livePic = new LivePic();
-                    livePic.content = po.getString("content");
+                    livePic.developpAt = po.getDate("developpAt");
                     data.add(livePic);
                 }
 

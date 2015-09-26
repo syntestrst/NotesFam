@@ -59,9 +59,10 @@ public class LivePicsAdapter extends RecyclerView.Adapter<ViewHolder> {
         LivePic livepic = mLivePics.get(position);
 
         // Set item views based on the data model
+        // variable instance member for get
         TextView textView = viewHolder.nameTextView;
-        textView.setText(livepic.content);
-        Log.d("onBind", "test" + livepic.content);
+        textView.setText(livepic.developpAt.toString());
+        Log.d("onBind", "test" + livepic.developpAt);
 
     }
      @Override

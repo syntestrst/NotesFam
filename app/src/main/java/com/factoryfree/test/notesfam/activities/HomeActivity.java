@@ -1,8 +1,10 @@
 package com.factoryfree.test.notesfam.activities;
 
+import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -97,7 +99,7 @@ public class HomeActivity extends AppCompatActivity{
 
     public void selectDrawerItem(MenuItem menuItem) {
 
-        android.support.v4.app.Fragment fragment = null;
+        Fragment fragment = null;
 
         Class fragmentClass;
         switch(menuItem.getItemId()) {
@@ -115,13 +117,13 @@ public class HomeActivity extends AppCompatActivity{
         }
 
         try {
-            fragment = (android.support.v4.app.Fragment) fragmentClass.newInstance();
+            fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Insert the fragment by replacing any existing fragment
-        android.support.v4.app.FragmentTransaction fragmenttransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmenttransaction = getFragmentManager().beginTransaction();
         fragmenttransaction
                 .replace(R.id.flContent, fragment)
                 .commit();

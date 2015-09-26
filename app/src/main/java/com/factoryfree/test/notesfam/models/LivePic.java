@@ -2,7 +2,9 @@ package com.factoryfree.test.notesfam.models;
 
 import com.parse.ParseObject;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,6 +12,8 @@ import java.util.List;
  */
 public class LivePic {
 
+    public File lifePicture;
     public String content;
+    public Date developpAt;
 
 }

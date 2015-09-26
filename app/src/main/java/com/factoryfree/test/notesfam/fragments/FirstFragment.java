@@ -3,13 +3,13 @@ package com.factoryfree.test.notesfam.fragments;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import com.factoryfree.test.notesfam.activities.HomeActivity;
 import com.factoryfree.test.notesfam.R;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -30,6 +29,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -37,14 +37,16 @@ import java.util.Date;
  */
 public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSetListener  {
 
-    private static final String TAG = HomeActivity.class.getSimpleName(); // for TAG Log class
+    private static final String TAG = FirstFragment.class.getSimpleName(); // for TAG Log class
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100; // onActivityResult call request code
     private static final int MEDIA_TYPE_IMAGE = 1;
 
-    public Uri fileUri;
-    public File mediaFile;
+    private Uri fileUri;
+    private File mediaFile;
     private String fileName = null;
-    TextView textview;
+    private Date dateblocked;
+    private Calendar cal;
+    private TextView textview;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -56,16 +58,16 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
         View RootView = inflater.inflate(R.layout.first_fragment, container, false);
 
         ////////////////////
-        // texview
-        TextView textview = (TextView)RootView.findViewById(R.id.date_textview);
+        // TextView select date
+        textview = (TextView)RootView.findViewById(R.id.date_textview);
 
         ////////////////////
-        // button take picture
+        // Button take picture
         Button button_picture = (Button) RootView.findViewById(R.id.take_picture_button);
         button_picture.setOnClickListener(mButtonPicListener);
 
         ///////////////////
-        // event Datepicker
+        // Event Datepicker
         Button button_date = (Button) RootView.findViewById(R.id.date_picker_button);
         button_date.setOnClickListener(mButtonDateListener);
 
@@ -76,21 +78,22 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
     /////////////////////////////////////////////////////////
     // DATEPICKER
     /////////////////////////////
-    private View.OnClickListener mButtonDateListener = new View.OnClickListener() {  // setting listener for user click event
+    private View.OnClickListener mButtonDateListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             DialogFragment newFragment = new DatePickerFragment(); // creating DialogFragment which creates DatePickerDialog
             newFragment.setTargetFragment(FirstFragment.this, 0);  // Passing this fragment DatePickerFragment.
-            newFragment.show(getActivity().getFragmentManager(), "datePicker"); // ededed in Homeactivity
-            /* Log.d("getActivity", "= " + getActivity());*/
-            /*Log.d("getActivityfragsupp", "= " + getActivity().getSupportFragmentManager());*/ // with import android.support.v4.app.Fragment;
-           /* Log.d("getActivityfragman", "= " + getActivity().getFragmentManager());*/
+            newFragment.show(getActivity().getFragmentManager(), "datePicker");
         }
     };
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Log.d("onDateSetfragment","= " + year + month + day);
-        textview.setText(year);
+        Log.d("onDateSetfragment", "= " + year + month + day);
+        textview.setText("year= " + year + "month= " + month + "day= " + day);
+        cal = Calendar.getInstance();
+        cal.set(year,month,day);
+        dateblocked = cal.getTime();
+
     }
 
     ////////////////////////////////////////////////////////
@@ -103,10 +106,8 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
              /** Compose Intent camera*/
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-
-           /** The Android Camera application saves a full-size photo if you give it a file to save into.
+            /** The Android Camera application saves a full-size photo if you give it a file to save into.
              You must provide a fully qualified file name where the camera app should save the photo.*/
-
             fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
@@ -212,23 +213,19 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
 
 
     /** Receive a camera Intent Result
-    A result code specified by the second activity.
-    This is either RESULT_OK if the operation was successful
-    or RESULT_CANCELED if the user backed out or the operation failed for some reason.*/
+     A result code specified by the second activity.
+     This is either RESULT_OK if the operation was successful
+     or RESULT_CANCELED if the user backed out or the operation failed for some reason.*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
             if (resultCode == Activity.RESULT_OK) {
-                /*Toast.makeText(this, "Image saved to:\n" + fileUri, Toast.LENGTH_LONG).show();*/
                 Log.d("onActivityResult", "result " + fileUri);
                 try{
-
-
-                     /** image to byteArray
+                    /** image to byteArray
                      First, you'll need to have the data in byte[] form and then create a ParseFile with it.
                      In many cases when the "context is required", "getContentResolver":
                      we simply need to pass in the instance of the current activity :=)*/
-
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), fileUri);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream(); //Creates a new byte array output stream. The buffer capacity is initially 32 bytes, though its size increases if necessary.
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -240,12 +237,8 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
                     if (scheme.equals("file")) {
                         fileName = fileUri.getLastPathSegment();
                     }
+                    // Parsefile
                     ParseFile file = new ParseFile(fileName, byteArray);
-
-
-                    /** As with ParseObject, there are many variants of the save method you can use depending
-                    on what sort of callback and error handling suits you.*/
-
                     file.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(com.parse.ParseException e) {
@@ -258,16 +251,20 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
                             // Update your progress spinner here. percentDone will be between 0 and 100.
                         }
                     });
-
-
+                    if(dateblocked == null){
+                        Calendar calendar = Calendar.getInstance();
+                        dateblocked = calendar.getTime();
+                    }
                     /** Finally, after the save completes, you can associate a
-                    ParseFile onto a ParseObject just like any other piece of data*/
-
+                     ParseFile onto a ParseObject just like any other piece of data*/
                     ParseObject Parseobject = new ParseObject("LifePic");
-                    Parseobject.put("LifePicture", file);
-                    Parseobject.put("blockedAt", new Date());
+                    Parseobject.put("lifePicture", file);
+                    Parseobject.put("developpAt",dateblocked);
+                    Log.d("date","date = " +dateblocked);
                     Parseobject.saveInBackground();
+
                 }
+
                 catch(FileNotFoundException e){
                     e.printStackTrace();
                 }
@@ -275,11 +272,13 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
                     e.printStackTrace();
                 }
 
+
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // User cancelled the image capture
+                Log.d(TAG,"User canceled the image capture");
             } else {
                 // Image capture failed, advise user
-                Log.d(TAG, "here");
+                Log.d(TAG, "iamge capture failed");
             }
         }
     }

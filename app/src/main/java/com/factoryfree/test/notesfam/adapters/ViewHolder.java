@@ -22,13 +22,16 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         // Stores the itemView in a public final member variable that can be used
         // to access the context from any ViewHolder instance.
         super(itemView);
-        nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+        nameTextView = (TextView) itemView.findViewById(R.id.date_developpat);
     }
 
     @Override
     public void onClick(View view) {
         int position = getLayoutPosition(); // get item position
-
+        /////////////////////////////////
+        // TODO: navigate on (view detail) with item clicked
+        // Activity or fragment from cardlist
+        //////////////////////////////////
 
     }
 }

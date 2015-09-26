@@ -1,9 +1,9 @@
 package com.factoryfree.test.notesfam.fragments;
 
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
 
 /**
  * Created by test on 07/09/2015.
  */
-public class ThirdFragment extends FragmentActivity {
+public class ThirdFragment extends Fragment {
 }
