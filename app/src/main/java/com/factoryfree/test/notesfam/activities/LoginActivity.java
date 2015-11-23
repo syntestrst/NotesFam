@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -26,7 +24,7 @@ public class LoginActivity extends Activity {
 
 
 
-    private CallbackManager callbackManager;
+    private CallbackManager mcallbackManager;
 
 
     @Override
@@ -38,14 +36,14 @@ public class LoginActivity extends Activity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
         // Creates an instance of CallbackManager
-        callbackManager = CallbackManager.Factory.create();
+        mcallbackManager = CallbackManager.Factory.create();
 
         /**  This class manages login and permissions for Facebook.
         Getter for the login manager getInstance.
         Registers a login callback to the given callback manager with registerCallback
-        callbackManager	The callback manager that will encapsulate the callback.
+        mcallbackManager	The callback manager that will encapsulate the callback.
         callback	The login callback that will be called on login completion.*/
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        LoginManager.getInstance().registerCallback(mcallbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -100,7 +98,7 @@ public class LoginActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("onActivityResult", "onActivityResult");
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        mcallbackManager.onActivityResult(requestCode, resultCode, data);
 
     }
 

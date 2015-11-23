@@ -12,10 +12,8 @@
     The android:theme is the main theme of the bar, and android:popupTheme is the theme to apply to menu item pop ups.
     If you are using a light theme, or want the look of a dark Action Bar,
     you can apply two themes directly on the Toolbar, which would look like this:
-    android:popupTheme="@android:style/ThemeOverlay.Material.Light" for menu popup-->
 
-
-
+   -->
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"

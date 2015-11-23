@@ -101,9 +101,6 @@ public class SecondFragment extends Fragment {
         // Some long-running task
         @Override
         protected List<LivePic> doInBackground(Void... voids) {
-            //////////////////////////////////////////////////////////////////
-            // TODO: implements logic with date when everything work (need design checkbox or select date in UI)
-            /////////////////////////////////////////
             ParseQuery<ParseObject> query = ParseQuery.getQuery("LifePic");
             try{
                 List<ParseObject> queryResult = query.find();
@@ -111,6 +108,32 @@ public class SecondFragment extends Fragment {
                 for(ParseObject po: queryResult){
                     LivePic livePic = new LivePic();
                     livePic.developpAt = po.getDate("developpAt");
+                    /////////////////////////////////////
+                    // TODO:
+                    // if developpAt < current time;
+                    // get file lifePicture on parse.com
+                    // need logic in view if lifePicture == null don't show in cardlist
+                    ///////////////////////////////////////////////////
+                    // TODO:
+                    // implements item click in card list
+                    // bind with view holder in cardList
+                    // if item is clicked start new view (Activity or fragment)
+                    // show detail view with lifePicture with transition animation  cardList
+                    // if Date < current time = show detail view lifePicture and options to save gallery android.
+                    // if Date > current time = show detail view with,
+                    // OPTIONS = comment picture
+                    // OPTIONS = gift send to friend ,i don't know at the moment INTENT, or redirect play store
+                    //
+                    ///////////////////////////////////////////////////////////////////////////////////
+                    // TODO:
+                    // design cardList
+                    // design detail detail view
+                    // desing LOGIN with parse user
+                    //////////////////////////////////////////////////////////////////////////////////////////////
+                    // TODO:
+                    // need User parse model for linked with my classes
+                    // implements logic with login parse
+                    // forget password, login,
                     data.add(livePic);
                 }
 

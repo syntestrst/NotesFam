@@ -37,16 +37,18 @@ import java.util.Date;
  */
 public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSetListener  {
 
+    // var classes
     private static final String TAG = FirstFragment.class.getSimpleName(); // for TAG Log class
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100; // onActivityResult call request code
     private static final int MEDIA_TYPE_IMAGE = 1;
 
-    private Uri fileUri;
-    private File mediaFile;
-    private String fileName = null;
-    private Date dateblocked;
-    private Calendar cal;
-    private TextView textview;
+    // var member instance
+    private Uri mfileUri;
+    private File mmediaFile;
+    private String mfileName = null;
+    private Date mdateblocked;
+    private Calendar mcal;
+    private TextView mtextview;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -59,7 +61,7 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
 
         ////////////////////
         // TextView select date
-        textview = (TextView)RootView.findViewById(R.id.date_textview);
+        mtextview = (TextView)RootView.findViewById(R.id.date_textview);
 
         ////////////////////
         // Button take picture
@@ -89,10 +91,10 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         Log.d("onDateSetfragment", "= " + year + month + day);
-        textview.setText("year= " + year + "month= " + month + "day= " + day);
-        cal = Calendar.getInstance();
-        cal.set(year,month,day);
-        dateblocked = cal.getTime();
+        mtextview.setText("year= " + year + "month= " + month + "day= " + day);
+        mcal = Calendar.getInstance();
+        mcal.set(year,month,day);
+        mdateblocked = mcal.getTime();
 
     }
 
@@ -108,8 +110,8 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
 
             /** The Android Camera application saves a full-size photo if you give it a file to save into.
              You must provide a fully qualified file name where the camera app should save the photo.*/
-            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+            mfileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mfileUri); // set the image file name
 
             //////////////////////////////////////
             // small Bitmap in the extras, under the key "data".
@@ -127,7 +129,11 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
              * Activity could send the result to only the Fragment that has been attached directly
              * to Activity but not the nested one. That's the reason why onActivityResult
              * of nested fragment would never been called no matter what.*/
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            // Android Development Patterns Ep 1 OMG :=)
+            // Verify that the intent will resolve to an activity
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
         }
     };
 
@@ -153,7 +159,7 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
             // internal IS ============== PRIVATE FOR OTHER APP (INTENT) ==================
             /*Context context = this;
             File mediaStorageDir = new File(context.getFilesDir(), "LivePic");
-            Log.d(TAG, "result_fileuri=" + fileUri);*/
+            Log.d(TAG, "result_fileuri=" + mfileUri);*/
 
             // Create the storage directory if it does not exist
             if (! mediaStorageDir.exists()){
@@ -168,11 +174,11 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             if (type == MEDIA_TYPE_IMAGE){
-                mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp + ".jpg");
+                mmediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp + ".jpg");
             } else {
                 return null;
             }
-            return mediaFile;
+            return mmediaFile;
         }
         else if(isExternalStorageMountedOncomputer()){
 
@@ -191,7 +197,9 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
 
     }
 
-    /** Checks if external storage is available for read and write */
+    /** == CHECK ==
+     * Checks if external storage is available for read and write
+     * */
     private boolean isExternalStorageMounted(){
         String state = Environment.getExternalStorageState();
         if(Environment.MEDIA_MOUNTED.equals(state)){
@@ -200,8 +208,8 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
         return false;
     }
 
-    /** Checks if external storage the media is being shared (connected to a computer)
-     *
+    /** == CHECK ==
+     * Checks if external storage the media is being shared (connected to a computer)
      * */
     private boolean isExternalStorageMountedOncomputer(){
         String state = Environment.getExternalStorageState();
@@ -213,37 +221,44 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
 
 
     /** Receive a camera Intent Result
-     A result code specified by the second activity.
-     This is either RESULT_OK if the operation was successful
-     or RESULT_CANCELED if the user backed out or the operation failed for some reason.*/
+     *  A result code specified by the second activity. = not in my cases I'm in fragment
+     *  This is either RESULT_OK if the operation was successful
+     *  or RESULT_CANCELED if the user backed out or the operation failed for some reason.
+     * */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
             if (resultCode == Activity.RESULT_OK) {
-                Log.d("onActivityResult", "result " + fileUri);
                 try{
                     /** image to byteArray
-                     First, you'll need to have the data in byte[] form and then create a ParseFile with it.
-                     In many cases when the "context is required", "getContentResolver":
-                     we simply need to pass in the instance of the current activity :=)*/
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), fileUri);
+                     *  First, you'll need to have the data in byte[] form and then create a ParseFile with it.
+                     *  In many cases when the "context is required", "getContentResolver":
+                     *  we simply need to pass in the instance of the current activity :=)
+                     * */
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mfileUri);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream(); //Creates a new byte array output stream. The buffer capacity is initially 32 bytes, though its size increases if necessary.
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                     byte[] byteArray = stream.toByteArray(); // Creates a newly allocated byte array.
                     stream.close();
 
-                    // URI to String for name file in server
-                    String scheme = fileUri.getScheme();
+                    /** URI to String for name file in server
+                     *  i use a name of fileuri for name in backend.
+                     */
+                    String scheme = mfileUri.getScheme();
                     if (scheme.equals("file")) {
-                        fileName = fileUri.getLastPathSegment();
+                        mfileName = mfileUri.getLastPathSegment();
                     }
-                    // Parsefile
-                    ParseFile file = new ParseFile(fileName, byteArray);
+
+                    /** ======= BEGIN PARSEFILE CREATION =============
+                     *  Create ParseFile with bytearray and save it
+                     *  in bacground.
+                     */
+                    ParseFile file = new ParseFile(mfileName, byteArray);
                     file.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(com.parse.ParseException e) {
                             // Handle success or failure here ...
-                            mediaFile.delete();
+                            mmediaFile.delete();
                         }
                     }, new ProgressCallback() {
 
@@ -251,18 +266,27 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
                             // Update your progress spinner here. percentDone will be between 0 and 100.
                         }
                     });
-                    if(dateblocked == null){
+                    /** ======= END PARSEFILE CREATION =============
+                     */
+
+
+                    /** if datepicker not selected insert current time*/
+                    if(mdateblocked == null){
                         Calendar calendar = Calendar.getInstance();
-                        dateblocked = calendar.getTime();
+                        mdateblocked = calendar.getTime();
                     }
-                    /** Finally, after the save completes, you can associate a
-                     ParseFile onto a ParseObject just like any other piece of data*/
+
+
+                    /** =========== BEGIN PUSH DATA ON BACKEND ===============
+                     *  Finally, after the save completes, you can associate a
+                     *  ParseFile onto a ParseObject just like any other piece of data
+                     *  */
                     ParseObject Parseobject = new ParseObject("LifePic");
                     Parseobject.put("lifePicture", file);
-                    Parseobject.put("developpAt",dateblocked);
-                    Log.d("date","date = " +dateblocked);
+                    Parseobject.put("developpAt", mdateblocked);
                     Parseobject.saveInBackground();
-
+                    /** =========== END PUSH DATA ON BACKEND ===============
+                     *  */
                 }
 
                 catch(FileNotFoundException e){
@@ -278,7 +302,7 @@ public class FirstFragment extends Fragment implements DatePickerDialog.OnDateSe
                 Log.d(TAG,"User canceled the image capture");
             } else {
                 // Image capture failed, advise user
-                Log.d(TAG, "iamge capture failed");
+                Log.d(TAG, "image capture failed");
             }
         }
     }
